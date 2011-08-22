@@ -137,7 +137,7 @@ module Adyen
 
         def parse_card_details(card)
           {
-            :expiry_date => Date.new(card.text('./payment:expiryYear').to_i, card.text('./payment:expiryMonth').to_i, -1),
+            :expiry_date => DateTime.new(card.text('./payment:expiryYear').to_i, card.text('./payment:expiryMonth').to_i, -1),
             :holder_name => card.text('./payment:holderName'),
             :number      => card.text('./payment:number')
           }
@@ -145,11 +145,11 @@ module Adyen
 
         def parse_elv_details(elv)
           {
-            :account_holder_name => bank.text('./payment:accountHolderName'),
-            :bank_account_number => bank.text('./payment:bankAccountNumber'),
-            :bank_location       => bank.text('./payment:bankLocation'),
-            :bank_location_id    => bank.text('./payment:bankLocationId'),
-            :bank_name           => bank.text('./payment:bankName')
+            :account_holder_name => elv.text('./payment:accountHolderName'),
+            :bank_account_number => elv.text('./payment:bankAccountNumber'),
+            :bank_location       => elv.text('./payment:bankLocation'),
+            :bank_location_id    => elv.text('./payment:bankLocationId'),
+            :bank_name           => elv.text('./payment:bankName')
           }
         end
 
